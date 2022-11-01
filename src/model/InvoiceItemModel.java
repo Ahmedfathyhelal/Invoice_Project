@@ -56,8 +56,9 @@ public class InvoiceItemModel {
     @Override
     public String toString() {
         return "InvoiceItem{" + "name=" + name + ", price=" + price + ", count=" + count + '}';
+    } 
+    
+    public String getAsCSV() {
+        return getInvoice().getNum()+","+getName()+","+price+","+count;
     }
-    
-    
-    
 }

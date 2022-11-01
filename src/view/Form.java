@@ -137,7 +137,7 @@ public class Form extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -150,9 +150,9 @@ public class Form extends javax.swing.JFrame {
                                     .addComponent(InvoiceTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(92, 92, 92)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                                 .addComponent(InvoiceNum, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 69, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -255,12 +255,20 @@ public class Form extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable linesTable;
     // End of variables declaration//GEN-END:variables
-    private Controller listener = new Controller(this);
+      private Controller listener = new Controller(this);
     public static DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
     private ArrayList<InvoiceHeaderModel> invoices;
     private HeaderTableModel headerTableModel;
     private ItemTableModel itemTableModel;
 
+    public int getNextInvNum() {
+        int num = 0;
+        for (InvoiceHeaderModel invoice : getInvoices()) {
+            if (invoice.getNum() > num) num = invoice.getNum();
+        }
+        return num + 1;
+    }
+    
     public ItemTableModel getItemTableModel() {
         return itemTableModel;
     }
@@ -287,6 +295,15 @@ public class Form extends javax.swing.JFrame {
         return inv;
     }
     
+    public InvoiceHeaderModel getInvoiceByNum2(int num) {
+        for (InvoiceHeaderModel item : getInvoices()) {
+            if (item.getNum() == num) {
+                return item;
+            }
+        }
+        return null;
+    }
+    
     public void setHeaderTableModel(HeaderTableModel headerTableModel) {
         this.headerTableModel = headerTableModel;
         this.invoicesTable.setModel(headerTableModel);
@@ -296,9 +313,7 @@ public class Form extends javax.swing.JFrame {
         return headerTableModel;
     }
 
-    
-    
-    public JTextField getCustomerNameArea() {
+     public JTextField getCustomerNameArea() {
         return CustomerName;
     }
 
@@ -313,7 +328,6 @@ public class Form extends javax.swing.JFrame {
     public JTextField getInvTotalArea() {
         return InvoiceTotal;
     }
-
     public JTable getInvoicesTable() {
         return invoicesTable;
     }
@@ -322,10 +336,9 @@ public class Form extends javax.swing.JFrame {
         return linesTable;
     }
 
-    public Object getjTextField1() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    public Controller getListener() {
+        return listener;
+    }  
     
     
     

@@ -3,6 +3,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import view.Form;
 
 public class InvoiceHeaderModel {
     private int num;
@@ -56,5 +57,9 @@ public class InvoiceHeaderModel {
     @Override
     public String toString() {
         return "InvoiceHeader{" + "num=" + num + ", name=" + name + ", date=" + date + '}';
+    }
+    
+     public String getAsCSV() {
+        return num+","+Form.df.format(date)+","+name;
     }
 }
